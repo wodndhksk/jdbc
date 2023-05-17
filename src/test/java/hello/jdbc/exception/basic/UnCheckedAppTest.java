@@ -1,8 +1,8 @@
 package hello.jdbc.exception.basic;
 
+import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.dao.DataAccessException;
 
 import java.sql.SQLException;
 
@@ -12,6 +12,7 @@ import java.sql.SQLException;
  * 이런 복구 불가능한 예외를 신경쓰지 않아도 된다. 물론 이렇게 복구 불가능한 예외는 일관성 있게 공통으로
  * 처리해야 한다
  */
+@Slf4j
 public class UnCheckedAppTest {
 
     @Test
@@ -19,6 +20,16 @@ public class UnCheckedAppTest {
         Controller controller = new Controller();
         Assertions.assertThatThrownBy(() -> controller.request())
                 .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    void printEx() {
+        Controller controller = new Controller();
+        try {
+            controller.request();
+        } catch (Exception e) {
+            log.info("message = {}", e.getMessage(), e);
+        }
     }
 
     static class Controller {
@@ -63,7 +74,7 @@ public class UnCheckedAppTest {
         }
 
         public void runSQL() throws SQLException {
-//            throw new SQLException("ex");
+            throw new SQLException("ex");
 
         }
 
