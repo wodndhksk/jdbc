@@ -6,6 +6,12 @@ import org.springframework.dao.DataAccessException;
 
 import java.sql.SQLException;
 
+/**
+ * 런타임 예외 - 대부분 복구 불가능한 예외
+ * 시스템에서 발생한 예외는 대부분 복구 불가능 예외이다. 런타임 예외를 사용하면 서비스나 컨트롤러가
+ * 이런 복구 불가능한 예외를 신경쓰지 않아도 된다. 물론 이렇게 복구 불가능한 예외는 일관성 있게 공통으로
+ * 처리해야 한다
+ */
 public class UnCheckedAppTest {
 
     @Test
